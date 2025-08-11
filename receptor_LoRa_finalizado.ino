@@ -31,19 +31,23 @@ void loop() {
     }
 
     if (len > 0 && data[0] == 'C' && data[1] == 'A' && data[2] == 'P' && data[3] == 'I') {
-      Serial.print("Dados recebidos: ");
+      //Serial.print("Dados recebidos: ");
       for (int i = 6; i < len - 1; i++) { 
         Serial.print((char)data[i]);
       }
+      uint8_t rssi = data[len - 1];
+      int rssi_dbm = -(256 - rssi);
+      String rssi_virgula = ", " + String(rssi_dbm);
+      Serial.print(rssi_virgula);
       Serial.println();
 
-      uint8_t rssi = data[len - 1];
-      Serial.print("RSSI (bruto): ");
-      Serial.println(rssi);
+      //uint8_t rssi = data[len - 1];
+      //Serial.print("RSSI (bruto): ");
+      //Serial.println(rssi);
 
-      int rssi_dbm = -(256 - rssi);
-      Serial.print("RSSI (em dBm): ");
-      Serial.println(rssi_dbm);
+      //int rssi_dbm = -(256 - rssi);
+      //Serial.print("RSSI (em dBm): ");
+      //Serial.println(rssi_dbm);
     }
     else {
       Serial.print("Dados do capibaja não recebidos!!\n");
